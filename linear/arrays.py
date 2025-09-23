@@ -11,9 +11,16 @@ total_first_quarter = expence[0]["January"] + expence[1]["February"] + expence[2
 print(f"Total expense in first quarter: ${total_first_quarter}")
 
 # 3. Find out if you spent exactly 2000 dollars in any month
+# option 1
 for ex in expence:
     if 2000 in ex.values():
         print(f"Yes, spent exactly $2000 in {list(ex.keys())} month")
+
+# option 2
+for month , amount in expence.items():
+    if amount == 2000:
+        print(f"Yes, spent exactly $2000 in {month} month")
+        
 
 # 4. June month just finished and your expense is 1980 dollar. Add this item to our monthly expense list
 expence.append({"June": 1980})
