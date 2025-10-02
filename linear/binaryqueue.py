@@ -33,9 +33,10 @@ class BinaryQueue:
 
 def binary_count(n):
     bq = BinaryQueue()
+    bq.enqueue("1")
     for i in range(n):
         s = bq.front()
-        bq.enqueue(n)
+        bq.dequeue()
         print(s) 
         
         bq.enqueue(s + "0")
