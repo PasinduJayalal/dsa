@@ -84,6 +84,30 @@ class BinarySearchTree:
             return self.data
         return self.right.maximum()
     
+    
+    def delete(self, val):
+        if self.data > val:
+            if self.left:
+                self.left = self.left.delete(val)
+        elif self.data < val:
+            if self.right:
+                self.right = self.right.delete(val)
+        else:
+            if self.left is None and self.right is None:
+                return None
+            if self.left is None:
+                return self.right
+            if self.right is None:
+                return self.left
+            # max_val = self.left.maximum()
+            # self.data = max_val
+            # self.left = self.left.delete(max_val)
+            min_val = self.right.minimum()
+            self.data = min_val
+            self.right = self.right.delete(min_val)
+            
+        return self
+    
 def build_tree(elements):
     root = BinarySearchTree(elements[0])
     
@@ -110,3 +134,7 @@ if __name__ == "__main__":
     
     print("Post order traversal gives:")
     print(numbers_tree.post_order_traversal())
+    
+    numbers_tree.delete(20)
+    print("In order traversal after deleting 20:")
+    print(numbers_tree.in_order_traversal())
