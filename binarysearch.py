@@ -14,14 +14,16 @@ class BinarySearch:
             self.mid_value = self.number_list[self.mid]
             
             if self.mid_value == target:
-                return f"Found {target} at index {self.mid}"
+                # return f"Found {target} at index {self.mid}"
+                return self.mid
             
             elif self.mid_value < target:
                 self.left = self.mid + 1
             else:
                 self.right = self.mid - 1
                 
-        return f"{target} not found in the list"
+        # return f"{target} not found in the list"
+        return -1
         
     
     
@@ -45,8 +47,42 @@ class BinarySearch:
             
         return self.search_recursive(target, left, right)
     
-
-
+    def same_element(self, target):
+        indices = []
+        for i in range(len(self.number_list)):
+            if self.number_list[i] == target:
+                indices.append(i)
+        if indices:
+            return f"Found {target} at indices {indices}"
+        else:
+            return f"{target} not found in the list"
+        
+    def find_all_occurances(self, target):
+        indices = self.search(target)
+        
+        index = [indices]
+        
+        i = indices - 1
+        
+        while i >= 0:  
+            if self.number_list[i] == target:
+                index.append(i)
+            else:
+                break
+            i -= 1
+            
+            
+        i = indices + 1
+        
+        while i < len(self.number_list):
+            if self.number_list[i] == target:
+                index.append(i)
+            else:
+                break
+            i += 1
+        return f"Found {target} at indices {sorted(index)}"
+            
+        
 if __name__ == "__main__":
     number_list = [1,4,6,9,11,15,15,15,17,21,34,34,56]
     target = 15
@@ -56,4 +92,5 @@ if __name__ == "__main__":
     print(bs.search(4))
     
     print(bs.search_recursive(target, 0, len(number_list)))
-    
+    print(bs.same_element(target))
+    print(bs.find_all_occurances(target))
